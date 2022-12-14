@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Átváltó</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        input, label {
+            display:block;
+        }
+    </style>
+
+    <script>
+        function atvaltas(){
+            let meter = parseFloat(document.getElementById("meter").value);
+
+            let feet = meter*3.2808399
+            let mile = meter*0.000621371192
+            let km = meter*0.001
+            let yard = meter*1.0936133
+            let inch = meter*39.3700787
+            
+            document.getElementById("output").value = "Láb: "+feet+"\nMérföld: "+mile+"\nKilóméter: "+km+"\nYard: "+yard+"\nInch: "+inch
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="meter">Méter</label>
+                            <input type="number" class="form-control" style="width: 100%;" name="meter" id="meter">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" onclick="atvaltas()" class="btn btn-primary" value="Számol" style="width: 100%;">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea disabled="true" style="width: 100%;" id="output" rows="5">easports</textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</body>
+</html>

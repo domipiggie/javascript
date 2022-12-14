@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kérdőív</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <script src="js.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-0"></div>
+            <div class="col-md-4 col-sm-12">
+                <form onsubmit="return(checkAnswers())">
+                    <h2>F1 kérdések</h2>
+            
+                    <div class="form-group">
+                        <label for="haloYear">Melyik évben vezették be a halo használatát?</label>
+                        <input type="text" id="haloYear" name="haloYear" class="form-control">
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="sebWDC">Hány világbajnoki címe van Sebastian Vettelnek?</label>
+                        <input type="text" id="sebWDC" name="sebWDC" class="form-control">
+                    </div>
+            
+                    <div class="form-group">
+                        <p>Jelenleg 3 száraz gumikeverék használható.</p>
+                        <input type="radio" id="tyreT" name="tyre_ans" value="true">
+                        <label for="true">Igaz</label><br>
+                        <input type="radio" id="tyreF" name="tyre_ans" value="false">
+                        <label for="false">Hamis</label><br>
+                    </div>
+            
+                    <h2>Foci kérdések</h2>
+                    <div class="form-group">
+                        <label for="francia">Ki a francia válogatott gólkirálya?</label>
+                        <input name="francia" class="form-control"  type="text" id= "kerdes1">
+                    </div>
+                    <div class="form-group">
+                        <label for="argentin">Ki az argentin válogatott gólkirálya?</label>
+                        <input name="argentin"  class="form-control" type="text" id= "kerdes2">
+                    </div>
+                    <div class="form-group">
+                        <label for="brazil">Ki a brazil válogatott gólkirálya?</label>
+                        <input name="brazil" class="form-control"  type="text" id= "kerdes3">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Ellenőrzés</button>
+                </form>
+            </div>
+            <div class="col-md-4 col-sm-0"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derékszögű háromszög</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        input, label {
+            display:block;
+        }
+    </style>
+
+    <script src="derekszoguharomszog.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="aoldal">A háromszög a oldala</label>
+                            <input type="number" class="form-control" style="width: 100%;" name="aoldal" id="aoldal">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aoldal">A háromszög b oldala</label>
+                            <input type="number" class="form-control" style="width: 100%;" name="boldal" id="boldal">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aoldal">A háromszög c oldala</label>
+                            <input type="number" class="form-control" style="width: 100%;" name="coldal" id="coldal">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="button" onclick="triangleValidator()" class="btn btn-primary" value="Számol" style="width: 100%;">
+                        </div>
+                        <p id="ans"></p>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</body>
+</html>
