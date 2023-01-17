@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Elements 3</title>
+
+    <script>
+        const radioButtons = document.querySelectorAll('input[name="evszak"]');
+        function evszakValaszto(){
+            let selectedSize;
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    selectedSize = radioButton.value;
+                    break;
+                }
+            }
+            console.log(selectedSize)
+        }
+    </script>
+</head>
+<body>
+    <input type="radio" id="1" name="evszak" value="1">
+    <label for="1">Tavasz</label><br>
+    <input type="radio" id="2" name="evszak" value="2">
+    <label for="2">Nyár</label><br>
+    <input type="radio" id="3" name="evszak" value="3">
+    <label for="3">Ősz</label><br>
+    <input type="radio" id="4" name="evszak" value="4">
+    <label for="4">Tél</label><br>
+
+    <input type="button" value="Submit" onclick="evszakValaszto()">
+
+    <p id="output"></p>
+</body>
+</html>

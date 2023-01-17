@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Elements 2</title>
+
+    <script>
+        function markaUpdate(){
+            let markaSelect = document.getElementById("autok")
+            document.getElementById("marka").innerHTML = markaSelect.value + " " + markaSelect.options[markaSelect.selectedIndex].text
+        }
+    </script>
+</head>
+<body>
+    <label for="autok">Válassz egy márkát:</label>
+    <select id="autok" name="autok" onchange="markaUpdate()">
+        <option value="none" selected disabled hidden></option>
+        <option value="1">Audi</option>
+        <option value="2">Ferrari</option>
+        <option value="3">Volvo</option>
+        <option value="4">Volkswagen</option>
+    </select>
+
+    <p id="marka"></p>
+    
+</body>
+</html>
