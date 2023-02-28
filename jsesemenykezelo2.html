@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function showPasswordText(){
+            document.getElementById("passwordText").style.visibility = "visible"
+        }
+        function hidePasswordText(){
+            document.getElementById("passwordText").style.visibility = "hidden"
+        }
+        function changeColors(picker){
+            document.getElementById("passwordText").style.color = picker.value
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <input type="color" value="#ff0000" style="width: 100%;" oninput="changeColors(this)"><br>
+
+        <label for="nev" style="width: 100%;">Név</label>
+        <input type="text" name="nev" id="nev" style="width: 100%;"><br>
+        <label for="email" style="width: 100%;">Jelszó</label>
+        <input style="width: 100%;" type="password" name="password" id="password" onfocus="showPasswordText()" onblur="hidePasswordText()">
+        <p id="passwordText" style="visibility:hidden; color: red; font-size: 16px; width: 100%;">A jelszó minimum hossza 8 karakter</p>
+    </form>
+</body>
+</html>

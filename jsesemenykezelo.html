@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eseményeksz</title>
+    <style>
+        input {
+            margin-bottom: 20px;
+            display: block;
+        }
+    </style>
+    <script>
+        function kozosVizsgal(element, outId){
+            document.getElementById(outId).innerHTML = element.value
+        }
+        function validateEmail(emailElement){
+            let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(emailElement.value)){
+                emailElement.style.color = "green"
+            }
+            else {
+                emailElement.style.color = "red"
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <label for="nev">Név</label>
+        <input type="text" name="nev" id="nev" onchange="kozosVizsgal(this, 'nameOutput')">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" onkeyup="kozosVizsgal(this, 'emailOutput'), validateEmail(this)">
+    </form>
+
+    <p id="nameOutput"></p>
+    <p id="emailOutput"></p>
+</body>
+</html>

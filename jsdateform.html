@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>idk</title>
+
+    <script>
+        function ellenorzes(){
+            var sDateRead = document.getElementById("sdate").value.split("-")
+            var eDateRead = document.getElementById("edate").value.split("-")
+
+            const startDate = new Date(sDateRead[0], sDateRead[1]-1, sDateRead[2]-1)
+            const endDate = new Date(eDateRead[0], eDateRead[1]-1, eDateRead[2]-1)
+            const currentDate = new Date()
+            currentDate.setHours(0,0,0,0)
+
+            if (startDate.getTime() > endDate.getTime()){
+                document.getElementById("out").innerHTML = "rossz kezdeti/végződési dátum"
+            }
+            else if (currentDate.getTime() > endDate.getTime()){
+                document.getElementById("out").innerHTML = "az esemény már véget ért"
+            }
+            else {
+                document.getElementById("out").innerHTML = ""
+            }
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="ellenorzes()">
+        <label for="nev">Esemény neve</label>
+        <input type="text" id="nev" name="nev"><br>
+
+        <label for="sdate">Esemény kezdő napja</label>
+        <input type="date" id="sdate" name="sdate"><br>
+
+        <label for="edate">Esemény befejező napja</label>
+        <input type="date" id="edate" name="edate"><br>
+
+        <input type="button" onclick="ellenorzes()">
+    </form>
+    <p id="out"></p>
+</body>
+</html>

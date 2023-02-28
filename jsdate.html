@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dátumoksz</title>
+    <script>
+        var dt = "2023-02-21T12:33:50.945Z".split(".")[0]
+        var time = dt.split("T")[1].split(":")
+        var date = dt.split("T")[0].split("-")
+
+        const napok = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"]
+
+        const d = new Date(date[0], date[1], date[2], time[0], time[1], time[2])
+
+        document.write(d.toDateString()+"<br>")
+
+        console.log(d.getTime())
+
+        document.write(napok[d.getDay()])
+    </script>
+</head>
+<body>
+    <p id="ido"></p>
+</body>
+</html>
