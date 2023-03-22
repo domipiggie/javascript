@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <title>Útiköltség</title>
+
+    <script>
+        function updateFuelPrice(){
+            let fuelType = document.getElementById("fuelType").selectedIndex
+            let fuelPriceBox = document.getElementById("fuelPrice")
+            if (fuelType == 1) fuelPriceBox.value = 605
+            else if (fuelType == 2) fuelPriceBox.value = 623
+        }
+
+        function checkForm(){
+            let name = document.getElementById("name")
+            let city = document.getElementById("city")
+            let vehicleType = document.getElementById("vehicleType")
+            let fuelType = document.getElementById("fuelType")
+            let fuelUsage = document.getElementById("fuelUsage")
+            let tripDate = document.getElementById("tripDate")
+            let startCity = document.getElementById("startCity")
+            let endCity = document.getElementById("endCity")
+            let distance = document.getElementById("distance")
+
+            let tripDateRAW = tripDate.value.split("-")
+            let tDate = new Date(tripDateRAW[0], tripDateRAW[1]-1, tripDateRAW[2]-1)
+            let currentDate = new Date()
+            currentDate.setHours(0,0,0,0)
+
+            let isFilled = true
+
+            if (name.value == ""){
+                isFilled = false
+                name.style.borderColor = "red"
+            } else name.style.borderColor = "lightgrey"
+
+            if (city.value == ""){
+                isFilled = false
+                city.style.borderColor = "red"
+            } else city.style.borderColor = "lightgrey"
+
+            if (vehicleType.value == ""){
+                isFilled = false
+                vehicleType.style.borderColor = "red"
+            } else vehicleType.style.borderColor = "lightgrey"
+
+
+            if (fuelType.value == ""){
+                isFilled = false
+                fuelType.style.borderColor = "red"
+            } else fuelType.style.borderColor = "lightgrey"
+
+
+            if (fuelType.value == ""){
+                isFilled = false
+                fuelType.style.borderColor = "red"
+            } else fuelUsage.style.borderColor = "lightgrey"
+
+            if (fuelUsage.value == ""){
+                isFilled = false
+                fuelUsage.style.borderColor = "red"
+            } else fuelUsage.style.borderColor = "lightgrey"
+
+            if (tripDate.value == "" || tDate.getTime() > currentDate.getTime()){
+                isFilled = false
+                tripDate.style.borderColor = "red"
+            } else tripDate.style.borderColor = "lightgrey"
+
+            if (startCity.value == ""){
+                isFilled = false
+                startCity.style.borderColor = "red"
+            } else startCity.style.borderColor = "lightgrey"
+
+            if (endCity.value == ""){
+                isFilled = false
+                endCity.style.borderColor = "red"
+            } else endCity.style.borderColor = "lightgrey"
+
+            if (distance.value == ""){
+                isFilled = false
+                distance.style.borderColor = "red"
+            } else distance.style.borderColor = "lightgrey"
+
+
+            if (isFilled){
+                let fuelUsageNumber, fuelTypePrice
+                switch (fuelUsage.selectedIndex){
+                    case 1:
+                        fuelUsageNumber = 7.6
+                        break;
+                    case 2:
+                        fuelUsageNumber = 8.6
+                        break;
+                    case 3:
+                        fuelUsageNumber = 9.5
+                        break;
+                    case 4:
+                        fuelUsageNumber = 11.4
+                        break;
+                    case 5:
+                        fuelUsageNumber = 13.3
+                        break;
+                }
+
+                if (fuelType.selectedIndex == 1) fuelTypePrice = 605
+                else fuelTypePrice = 623
+
+                let utikoltseg = Math.round((fuelUsageNumber * fuelTypePrice * distance.value) / 100)
+                document.getElementById("tripPrice").value = "Útiköltség: " + utikoltseg + " Ft"
+
+                let amortizacio = distance.value * 15
+                document.getElementById("amortizacio").value = "Amortizáció: " + amortizacio + " Ft"
+
+                document.getElementById("totalPrice").value = "Összes elszámolandó költség: " + (amortizacio+utikoltseg) + " Ft"
+
+                document.getElementById("print").disabled = false
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="d-flex justify-content-center">
+        <form>
+            <h1 class="text-center">Útiköltség elszámolás</h1>
+
+            <div class="form-group">
+                <h2>Személyes adatok</h2>
+                <label for="name">Név</label>
+                <input type="text" class="form-control" name="name" id="name">
+
+                <label for="city">Város</label>
+                <input type="text" class="form-control" name="city" id="city">
+            </div>
+
+            <div class="form-group">
+                <h2>Gépjármű- és üzemanyagadatok</h2>
+                <label for="vehicleType">Gépjármű gyártmánya, típusa</label>
+                <input type="text" class="form-control" name="vehicleType" id="vehicleType">
+
+                <label for="fuelType">Üzemanyag fajta</label>
+                <select id="fuelType" name="fuelType" class="form-control" onchange="updateFuelPrice()">
+                    <option value="" selected disabled hidden>Válasszon...</option>
+                    <option value="1">Benzin</option>
+                    <option value="2">Gázolaj</option>
+                </select>
+
+                <label for="fuelUsage">Fogyasztási norma</label>
+                <select id="fuelUsage" name="fuelUsage" class="form-control">
+                    <option value="" selected disabled hidden>Válasszon...</option>
+                    <option value="1">1000 cm3-ig 7,6 l/100km</option>
+                    <option value="2">1001-1500 cm3 között 8,6 l/100km</option>
+                    <option value="3">1501-2000 cm3 között 9,5 l/100km</option>
+                    <option value="4">2001-3000 cm3 között 11,4 l/100km</option>
+                    <option value="5">3001 cm3 fölött 13,3 l/100km</option>
+                </select>
+
+                <label for="tripDate">Utazás dátuma</label>
+                <input type="date" id="tripDate" name="tripDate" class="form-control">
+
+                <label for="fuelPrice">Üzemanyag egységára</label>
+                <input type="number" id="fuelPrice" name="fuelPrice" disabled="true" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <h2>A megtett út adatai</h2>
+                <label for="startCity">Kiindulási hely</label>
+                <input type="text" class="form-control" name="startCity" id="startCity">
+
+                <label for="endCity">Úticél</label>
+                <input type="text" class="form-control" name="endCity" id="endCity">
+
+                <label for="distance">Összes megtett út Googlem Maps alapján</label>
+                <input type="number" class="form-control" name="distance" id="distance">
+            </div>
+
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" value="Ellenőrzés és számítás" onclick="checkForm()">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="tripPrice" disabled="true" value="Utiköltség: Ft">
+
+                <input type="text" class="form-control" id="amortizacio" disabled="true" value="Amortizáció: Ft">
+
+                <input type="text" class="form-control font-weight-bold" disabled="true" id="totalPrice" value="Összes elszámolandó költség: Ft">
+            </div>
+
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" id="print" value="Nyomtatás" disabled="true">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

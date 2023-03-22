@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <script>
+        function updateSliderScore(element){
+            document.getElementById(element.id+"score").innerHTML = element.value
+            recommendedLevel()
+        }
+
+        function recommendedLevel(){
+            let javascore = parseInt(document.getElementById("java").value)
+            let phpscore = parseInt(document.getElementById("php").value)
+            let jscriptscore = parseInt(document.getElementById("jscript").value)
+            let htmlcssscore = parseInt(document.getElementById("htmlcss").value)
+
+            let totalScore = javascore + phpscore + jscriptscore + htmlcssscore
+            let skillField = document.getElementById("skill")
+
+            if (javascore <= 7 && phpscore <= 7 && jscriptscore <= 7 && htmlcssscore <= 7 && totalScore <= 20){
+                skillField.value = "Az ön szintje: középhaladó! Elért pontszáma: " + totalScore
+            }
+            else if (javascore >= 6 && phpscore >= 6 && jscriptscore >= 6 && htmlcssscore >= 6 && totalScore >= 20){
+                skillField.value = "Az ön szintje: haladó! Elért pontszáma: " + totalScore
+            }
+            else {
+                skillField.value = "Szintfelmérés szükséges! Elért pontszáma: " + totalScore
+            }
+
+        }
+
+        function validateEmail(element){
+            let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(element.value)){
+                return true
+            }
+            else {
+                return false
+            }
+        }
+
+        function validateForm(){
+            let isValid = true
+
+            if (document.getElementById("lname").value == ""){
+                document.getElementById("lname").style.borderColor = "red"
+                isValid = false
+            } else document.getElementById("lname").style.borderColor = "lightgray"
+
+            if (document.getElementById("fname").value == ""){
+                document.getElementById("fname").style.borderColor = "red"
+                isValid = false
+            } else document.getElementById("fname").style.borderColor = "lightgray"
+
+            if (!validateEmail(document.getElementById("email"))){
+                document.getElementById("email").style.borderColor = "red"
+                isValid = false
+            } else document.getElementById("email").style.borderColor = "lightgray"
+
+            if (document.getElementById("selectDate").selectedIndex == ""){
+                document.getElementById("selectDate").style.borderColor = "red"
+                isValid = false
+            } else document.getElementById("selectDate").style.borderColor = "lightgray"
+
+            if (!isValid) return
+
+            let minDateMs = new Date(2023, 2, 21, 10, 0, 0).getTime()
+            let maxDateMs = new Date(2023, 2, 21, 10, 30, 0).getTime()
+            let currentDateMs = new Date().getTime()
+
+            if (minDateMs > currentDateMs || currentDateMs > maxDateMs) {
+                alert("Az űrlap kitöltési ideje 2023. 03. 21. 10:00-10:30")
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+    <div class="d-sm-flex flex-column justify-content-center p-md-5 p-1">
+        <form>
+            <h1 class="text-center">Regisztráció</h1>
+
+            <div class="form-group">
+                <h2>Személyes adatok</h2>
+                <label for="lname">Vezetéknév</label>
+                <input type="text" class="form-control" name="lname" id="lname" required>
+
+                <label for="fname">Keresztnév</label>
+                <input type="text" class="form-control" name="fname" id="fname" required>
+
+                <label for="email">Email cím</label>
+                <input type="text" class="form-control" name="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <h2>Skillek</h2>
+                <label for="java">Java (<span id="javascore">1</span>)</label>
+                <input type="range" min="1" max="10" value="1" name="java" id="java" class="form-control-range" oninput="updateSliderScore(this)">
+
+                <label for="php">PHP (<span id="phpscore">1</span>)</label>
+                <input type="range" min="1" max="10" value="1" name="php" id="php" class="form-control-range" oninput="updateSliderScore(this)">
+
+                <label for="jscript">JavaScript (<span id="jscriptscore">1</span>)</label>
+                <input type="range" min="1" max="10" value="1" name="jscript" id="jscript" class="form-control-range" oninput="updateSliderScore(this)">
+
+                <label for="htmlcss">HTML, CSS (<span id="htmlcssscore">1</span>)</label>
+                <input type="range" min="1" max="10" value="1" name="htmlcss" id="htmlcss" class="form-control-range" oninput="updateSliderScore(this)">
+            </div>
+
+            <div class="form-group">
+                <label for="selectDate">Időpont</label>
+                <select id="selectDate" name="selectDate" class="form-control">
+                    <option value="" selected disabled hidden>Válasszon...</option>
+                    <option value="1">2023. 03. 25.</option>
+                    <option value="2">2023. 03. 26</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="skill">Javasolt szint</label>
+                <input type="text" name="skill" id="skill" disabled="true" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" id="print" value="Elküldés" onclick="validateForm()">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
